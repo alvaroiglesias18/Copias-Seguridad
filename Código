@@ -1,0 +1,46 @@
+Write-Host ‘————————————————————————————————————’
+Write-Host ‘Copia de seguridad’
+Write-Host ‘————————————————————————————————————’
+
+do{
+Write-Host ‘Si quiere una copia de seguridad completa introduzca 1’
+Write-Host ‘Si quiere una copia de seguridad de su tarjeta sd introduzca 2’
+Write-Host ‘Si quiere una copia de seguridad de las aplicaciones instaladas o de sistema introduzca 3’
+Write-Host ‘Salir - 4
+
+’
+$opcion=[int](Read-Host ‘Introduzca la opcion que desea realizar: ’)
+
+switch($opcion){
+1{
+cd "C:\platform-tools"
+.\adb backup -f C:\CopiasSeguridad\Completa\backup.ab -apk -all -shared -system
+$control=Read-Host ‘¿Quiere continuar introduciendo datos (1 para sí y 0 para no)?
+
+'
+break
+}
+2{
+cd "C:\platform-tools"
+.\adb backup -f C:\CopiasSeguridad\SD\backup.ab -shared
+$control=Read-Host ‘¿Quiere continuar introduciendo datos (1 para sí y 0 para no)?
+
+'
+break
+}
+3{
+cd "C:\platform-tools"
+.\adb backup -f C:\CopiasSeguridad\Apps\backup.ab -apk -all -system
+$control=Read-Host ‘¿Quiere continuar introduciendo datos (1 para sí y 0 para no)?
+
+'
+break
+}
+4{
+break
+}
+}
+}while($control -eq 1)
+
+Write-Host ‘¡¡ Hasta pronto !!’
+
